@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="PIVOT-Reflex">
+  <compiler angle="radian" autolimits="true" meshdir="../assets/meshes" discardvisual="false" fusestatic="false" inertiafromgeom="false" />
+  <option timestep="0.002" gravity="0 0 -9.81" integrator="implicitfast" />
+  <statistic center="0 0 0.12" extent="0.75" />
+  <visual>
+    <headlight ambient="0.6 0.6 0.6" />
+  </visual>
+  <asset>
+    <texture name="ground_checker" type="2d" builtin="checker" rgb1="0.11 0.17 0.23" rgb2="0.19 0.27 0.34" width="512" height="512" />
+    <material name="ground_material" texture="ground_checker" texrepeat="12 12" texuniform="true" reflectance="0" />
+    <mesh name="base_link_mesh" file="base_link.stl" />
+    <mesh name="left_wheel_link_mesh" file="left_wheel_link.stl" />
+    <mesh name="right_wheel_link_mesh" file="right_wheel_link.stl" />
+    <mesh name="lidar_link_mesh" file="lidar_link.stl" />
+    <mesh name="camera_link_mesh" file="camera_link.stl" />
+    <mesh name="ultrasonic_front_link_mesh" file="front_sonic_link.stl" />
+    <mesh name="ultrasonic_right_link_mesh" file="right_sonic_link.stl" />
+    <mesh name="ultrasonic_left_link_mesh" file="left_sonic_link.stl" />
+  </asset>
+  <worldbody>
+    <light pos="0 -2 3" directional="true" dir="0 0 -1" />
+    <geom name="floor" type="plane" pos="0 0 0" size="2 2 0.1" material="ground_material" friction="1.25 0.005 0.0001" condim="3" />
+    <body name="base_link" pos="0 0 0.064" quat="1 0 0 0">
+      <freejoint name="root" />
+      <inertial pos="0 0 0.0583" quat="1 0 0 0" mass="1.225" diaginertia="0.00699 0.00657 0.00227" />
+      <geom name="collision_base_link" pos="0 0 0.0895" quat="1 0 0 0" group="3" contype="1" conaffinity="1" type="box" size="0.07064 0.06 0.1085" rgba="0.16 0.50 0.72 0.22" />
+      <geom name="visual_base_link" type="mesh" mesh="base_link_mesh" pos="0 0 0" quat="0.7071054825 0 0 0.7071080799" rgba="0.88 0.90 0.93 1.0" group="1" contype="0" conaffinity="0" />
+      <body name="left_wheel_link" pos="0 0.079 -0.0305" quat="1 0 0 0">
+        <joint name="left_wheel_joint" type="hinge" axis="0 1 0" limited="false" damping="0.01" frictionloss="0.001" />
+        <inertial pos="0 0 0" quat="1 0 0 0" mass="0.0988" diaginertia="3.74e-5 6.60e-5 3.74e-5" />
+        <geom name="collision_left_wheel_link" pos="0 0 0" quat="0.7071054825 0.7071080799 0 0" group="3" contype="1" conaffinity="1" type="cylinder" size="0.0335 0.0135" friction="1.25 0.005 0.0001" rgba="0.10 0.10 0.11 0.85" />
+        <geom name="visual_left_wheel_link" type="mesh" mesh="left_wheel_link_mesh" pos="0 0 0" quat="0.7071054825 0 0 0.7071080799" rgba="0.0 0.0 0.0 1.0" group="1" contype="0" conaffinity="0" />
+      </body>
+      <body name="right_wheel_link" pos="0 -0.079 -0.0305" quat="1 0 0 0">
+        <joint name="right_wheel_joint" type="hinge" axis="0 1 0" limited="false" damping="0.01" frictionloss="0.001" />
+        <inertial pos="0 0 0" quat="1 0 0 0" mass="0.0988" diaginertia="3.74e-5 6.60e-5 3.74e-5" />
+        <geom name="collision_right_wheel_link" pos="0 0 0" quat="0.7071054825 0.7071080799 0 0" group="3" contype="1" conaffinity="1" type="cylinder" size="0.0335 0.0135" friction="1.25 0.005 0.0001" rgba="0.10 0.10 0.11 0.85" />
+        <geom name="visual_right_wheel_link" type="mesh" mesh="right_wheel_link_mesh" pos="0 0 0" quat="0.7071054825 0 0 0.7071080799" rgba="0.0 0.0 0.0 1.0" group="1" contype="0" conaffinity="0" />
+      </body>
+      <body name="imu_link" pos="0 0 0" quat="1 0 0 0">
+        <inertial pos="0 0 0" quat="1 0 0 0" mass="1e-5" diaginertia="1e-9 1e-9 1e-9" />
+        <site name="imu_site" pos="0 0 0" size="0.004" rgba="1 0.15 0.15 1" />
+      </body>
+      <body name="lidar_link" pos="0.00079 -0.0014 0.18515" quat="1 0 0 0">
+        <inertial pos="0 0 0" quat="1 0 0 0" mass="1e-5" diaginertia="1e-9 1e-9 1e-9" />
+        <geom name="visual_lidar_link" type="mesh" mesh="lidar_link_mesh" pos="0 0 0" quat="0.7071054825 0 0 0.7071080799" rgba="0.0 0.0 0.0 1.0" group="1" contype="0" conaffinity="0" />
+      </body>
+      <body name="camera_link" pos="0.11826 -0.0045 0.13872" quat="1 0 0 0">
+        <inertial pos="0 0 0" quat="1 0 0 0" mass="1e-5" diaginertia="1e-9 1e-9 1e-9" />
+        <geom name="visual_camera_link" type="mesh" mesh="camera_link_mesh" pos="0 0 0" quat="0.7071054825 0 0 0.7071080799" rgba="0.0 0.0 0.0 1.0" group="1" contype="0" conaffinity="0" />
+      </body>
+      <body name="ultrasonic_front_link" pos="0.06698 0 0.0645" quat="1 0 0 0">
+        <inertial pos="0 0 0" quat="1 0 0 0" mass="1e-5" diaginertia="1e-9 1e-9 1e-9" />
+        <geom name="visual_ultrasonic_front_link" type="mesh" mesh="ultrasonic_front_link_mesh" pos="0 0 0" quat="0.7071054825 0 0 0.7071080799" rgba="0.06 0.35 0.18 1.0" group="1" contype="0" conaffinity="0" />
+      </body>
+      <body name="ultrasonic_right_link" pos="0 -0.05245 0.0657" quat="1 0 0 0">
+        <inertial pos="0 0 0" quat="1 0 0 0" mass="1e-5" diaginertia="1e-9 1e-9 1e-9" />
+        <geom name="visual_ultrasonic_right_link" type="mesh" mesh="ultrasonic_right_link_mesh" pos="0 0 0" quat="0.7071054825 0 0 0.7071080799" rgba="0.06 0.35 0.18 1.0" group="1" contype="0" conaffinity="0" />
+      </body>
+      <body name="ultrasonic_left_link" pos="0 0.05245 0.0657" quat="1 0 0 0">
+        <inertial pos="0 0 0" quat="1 0 0 0" mass="1e-5" diaginertia="1e-9 1e-9 1e-9" />
+        <geom name="visual_ultrasonic_left_link" type="mesh" mesh="ultrasonic_left_link_mesh" pos="0 0 0" quat="0.7071054825 0 0 0.7071080799" rgba="0.06 0.35 0.18 1.0" group="1" contype="0" conaffinity="0" />
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <motor name="left_motor" joint="left_wheel_joint" gear="1" ctrllimited="true" ctrlrange="-0.470719 0.470719" />
+    <motor name="right_motor" joint="right_wheel_joint" gear="1" ctrllimited="true" ctrlrange="-0.470719 0.470719" />
+  </actuator>
+  <sensor>
+    <gyro name="imu_gyro" site="imu_site" />
+    <accelerometer name="imu_accel" site="imu_site" />
+  </sensor>
+</mujoco>

@@ -1,0 +1,22 @@
+
+{
+  "motor_model": "MD520Z30_12V",
+  "rated_voltage_v": 12.0,
+  "reduction_ratio": 30,
+  "output_speed_rpm_published": 333.0,
+  "speed_tolerance_rpm_published": 10.0,
+  "stall_torque_nm_published": 0.470719,
+  "rated_torque_nm_published": 0.323619,
+  "rated_current_a_published": 0.3,
+  "stall_current_a_published": 3.0,
+  "rated_power_w_published_upper_bound": 4.0,
+  "encoder_lines_per_motor_rev": 11,
+  "encoder_counts_per_output_rev_x4": 1320,
+  "simulated_motor": {
+    "bus_voltage_v_assumed": 12.0,
+    "estimated_no_load_output_rpm": 333.0,
+    "peak_torque_cap_nm_experimental": 0.2,
+    "pwm_deadband_normalized_assumed": 0.02,
+    "zero_command_mode": "coast"
+  }
+}

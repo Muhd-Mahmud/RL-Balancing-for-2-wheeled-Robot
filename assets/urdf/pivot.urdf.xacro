@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot name="pivot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find pivot_description)/urdf/pivot_gazebo.xacro"/>
+  <xacro:include filename="$(find pivot_description)/urdf/pivot_sensors.xacro"/>
+  <xacro:include filename="$(find pivot_description)/urdf/pivot_control.xacro"/>
+
+  <link name="base_footprint"/>
+<!-- base link n joint-->
+
+
+    <link name="base_link">
+    
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5708" />
+      <geometry>
+        <mesh filename="package://pivot_description/meshes/base_link.stl" />
+      </geometry>
+     <material name="chrome">
+        <color rgba="0.88 0.90 0.93 1.0"/>
+     </material>
+    </visual>
+
+        <inertial>
+      <origin xyz="0 0 0.0583" rpy="0 0 0"/>
+      <mass value="1.225"/>
+      <inertia ixx="0.00699" iyy="0.00657" izz="0.00227"
+               ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+
+    <collision>
+  <origin xyz="0 0 0.0895" rpy="0 0 0" />
+<geometry>
+  <box size="0.14128 0.120 0.217"/>
+</geometry>
+</collision>
+ 
+  </link>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+    <origin xyz="0 0 0.064" rpy="0 0 0"/>
+  </joint>
+
+<!-- right wheel n joint-->
+
+  <link name="right_wheel_link">
+    
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5708" />
+      <geometry>
+        <mesh filename="package://pivot_description/meshes/right_wheel_link.stl" />
+      </geometry>
+           <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+     </material>
+    </visual>
+    
+        <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.0988"/>
+      <inertia ixx="3.74e-5" iyy="6.60e-5" izz="3.74e-5"
+               ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0" />
+      <geometry>
+        <cylinder radius="0.0335" length="0.027"/>
+      </geometry>
+    </collision>
+
+  </link>
+
+  <joint name="right_wheel_joint" type="continuous">
+    <origin xyz="0 -0.079 -0.0305" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="right_wheel_link" />
+    <axis xyz="0 1 0" />
+        <dynamics damping="0.01" friction="0.001"/>
+  </joint>
+  
+
+  <!-- left wheel n joint-->
+
+  <link
+    name="left_wheel_link">
+    
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5708" />
+      <geometry>
+        <mesh filename="package://pivot_description/meshes/left_wheel_link.stl" />
+      </geometry>
+                 <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+     </material>
+    </visual>
+    
+        <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.0988"/>
+      <inertia ixx="3.74e-5" iyy="6.60e-5" izz="3.74e-5"
+               ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0" />
+      <geometry>
+        <cylinder radius="0.0335" length="0.027"/>
+      </geometry>
+    </collision>
+
+  </link>
+
+  <joint name="left_wheel_joint" type="continuous">
+    <origin xyz="0 0.079 -0.0305" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="left_wheel_link" />
+    <axis xyz="0 1 0" />
+        <dynamics damping="0.01" friction="0.001"/>
+  </joint>
+
+     <!-- imu n joint-->
+
+  <link name="imu_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-5"/>
+      <inertia ixx="1e-9" iyy="1e-9" izz="1e-9"
+               ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="imu_link" />
+  </joint>
+
+  <!-- lidar n joint-->
+   
+  <link
+    name="lidar_link">
+    
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5708" />
+      <geometry>
+        <mesh filename="package://pivot_description/meshes/lidar_link.stl" />
+      </geometry>
+                 <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+     </material>
+    </visual>
+
+        <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-5"/>
+      <inertia ixx="1e-9" iyy="1e-9" izz="1e-9"
+               ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <origin xyz="0.00079 -0.0014 0.18515" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="lidar_link" />
+  </joint>
+
+
+ <!-- camera n joint-->
+   
+  <link
+    name="camera_link">
+    
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5708" />
+      <geometry>
+        <mesh filename="package://pivot_description/meshes/camera_link.stl" />
+      </geometry>
+                 <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+     </material>
+    </visual>
+    
+        <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-5"/>
+      <inertia ixx="1e-9" iyy="1e-9" izz="1e-9"
+               ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="0.11826 -0.0045 0.13872" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="camera_link" />
+  </joint>
+  
+
+  <!-- front_sonic n joint-->
+   
+  <link
+    name="ultrasonic_front_link">
+    
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5708" />
+      <geometry>
+        <mesh filename="package://pivot_description/meshes/front_sonic_link.stl" />
+      </geometry>
+                 <material name="pcb_green">
+        <color rgba="0.06 0.35 0.18 1.0"/>
+     </material>
+    </visual>
+    
+        <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-5"/>
+      <inertia ixx="1e-9" iyy="1e-9" izz="1e-9"
+               ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+
+  </link>
+
+  <joint name="ultrasonic_front_joint" type="fixed">
+    <origin xyz="0.06698 0 0.0645" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="ultrasonic_front_link" />
+  </joint>
+
+  <!-- right_sonic n joint-->
+   
+  <link
+    name="ultrasonic_right_link">
+    
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5708" />
+      <geometry>
+        <mesh filename="package://pivot_description/meshes/right_sonic_link.stl" />
+      </geometry>
+                 <material name="pcb_green">
+        <color rgba="0.06 0.35 0.18 1.0"/>
+     </material>
+    </visual>
+    
+        <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-5"/>
+      <inertia ixx="1e-9" iyy="1e-9" izz="1e-9"
+               ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+
+  </link>
+
+  <joint name="ultrasonic_right_joint" type="fixed">
+    <origin xyz="0 -0.05245 0.0657" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="ultrasonic_right_link" />
+  </joint>
+
+  <!-- left_sonic n joint-->
+   
+  <link
+    name="ultrasonic_left_link">
+    
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5708" />
+      <geometry>
+        <mesh filename="package://pivot_description/meshes/left_sonic_link.stl" />
+      </geometry>
+                 <material name="pcb_green">
+        <color rgba="0.06 0.35 0.18 1.0"/>
+     </material>
+    </visual>
+    
+        <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-5"/>
+      <inertia ixx="1e-9" iyy="1e-9" izz="1e-9"
+               ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+
+  </link>
+
+  <joint name="ultrasonic_left_joint" type="fixed">
+    <origin xyz="0 0.05245 0.0657" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="ultrasonic_left_link" />
+  </joint>
+
+  </robot>

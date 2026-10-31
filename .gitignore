@@ -1,0 +1,23 @@
+# Python virtual environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Local training outputs and large checkpoints
+checkpoints/*.zip
+logs/
+results/*.json
+*.tfevents.*
+
+# Developer/system files
+.DS_Store
+.vscode/
+core
+core.*
+
+# Preserve optional output directories
+!checkpoints/.gitkeep
+!results/.gitkeep
