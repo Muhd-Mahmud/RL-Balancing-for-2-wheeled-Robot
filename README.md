@@ -4,7 +4,7 @@
 
 **Learning to stand. Learning to recover.**
 
-[**GitHub Repository**](https://github.com/Muhd-Mahmud/PIVOT-Reflex) · [**Author Profile**](https://github.com/Muhd-Mahmud) · [**Issues**](https://github.com/Muhd-Mahmud/PIVOT-Reflex/issues) · [**Releases**](https://github.com/Muhd-Mahmud/PIVOT-Reflex/releases)
+[**GitHub Repository**](https://github.com/Muhd-Mahmud/RL-Balancing-for-2-wheeled-Robot) · [**Author Profile**](https://github.com/Muhd-Mahmud) · [**Issues**](https://github.com/Muhd-Mahmud/RL-Balancing-for-2-wheeled-Robot/issues) · [**Releases**](https://github.com/Muhd-Mahmud/RL-Balancing-for-2-wheeled-Robot/releases)
 
 A reinforcement-learning controller for a **CAD-designed, two-wheeled inverted-pendulum robot**, trained in **MuJoCo** with **Proximal Policy Optimization (PPO)**. **PIVOT has not yet been physically built.**
 
@@ -121,7 +121,7 @@ When the physical prototype exists, this section can be expanded with an actual 
 
 ```bash
 # From the PIVOT-Reflex project root
-git clone https://github.com/Muhd-Mahmud/PIVOT-Reflex.git
+git clone https://github.com/Muhd-Mahmud/RL-Balancing-for-2-wheeled-Robot.git
 cd PIVOT-Reflex
 python3 -m venv .venv
 source .venv/bin/activate
@@ -172,7 +172,7 @@ The evaluation summary is written to `results/evaluation.json`. **Trained checkp
 ## Project structure
 
 ```text
-PIVOT-Reflex/
+RL-Balancing-for-2-wheeled-Robot/
 ├── assets/
 │   ├── urdf/                 # Source PIVOT Xacro
 │   └── meshes/               # Optimized visual STL assets
@@ -202,7 +202,7 @@ PIVOT-Reflex/
 ## Research roadmap
 
 -   [x] **Stage 1 — Nominal autonomous balancing:** train PPO and evaluate initial-tilt and push survival in simulation.
--   [ ] **Stage 2 — Robust disturbance recovery:** train with repeated/random pushes, longer episodes, and recovery-aware rewards.
+-   [x] **Stage 2 — Robust disturbance recovery:** train with repeated/random pushes, longer episodes, and recovery-aware rewards.
 -   [ ] **Stage 3 — Dynamics randomization:** vary inertia, friction, motor strength, sensor noise, and latency; quantify transfer robustness.
 -   [ ] **Stage 4 — Balancing while moving:** separate wheel commands for forward/reverse velocity tracking and steering.
 -   [ ] **Stage 5 — Build and sim-to-real validation:** assemble the physical PIVOT prototype; measure and calibrate dynamics; implement safety fallback and hardware protections; then evaluate on hardware.
@@ -217,43 +217,12 @@ PIVOT-Reflex/
 -   The robot’s simulated mass/inertia values come from the supplied Xacro. No physical PIVOT has been built, so the model is not yet calibrated against measurements from the assembled robot.
 -   Exact replay requires the saved policy checkpoint and matching model/environment versions. Keep release-specific configs and checkpoints together.
 
-## Publish v0.1.0
-
-This is the intended public repository URL: **[Muhd-Mahmud/PIVOT-Reflex](https://github.com/Muhd-Mahmud/PIVOT-Reflex)**. These links will work after you create and push the repository; the project has **not been uploaded by this README package**.
-
-1.  On GitHub, [create a new repository](https://github.com/new) named **`PIVOT-Reflex`** under **`Muhd-Mahmud`**. Set it to **Public**, and **do not** initialize it with another README, `.gitignore`, or license.
-    
-2.  From the existing local `PIVOT-Reflex` folder, include `README.md`, `LICENSE`, and `docs/media/` alongside your project code and model assets. The `.gitignore` should exclude `.venv/`, TensorBoard logs and local checkpoints. Check `git status` and review files before staging; don’t commit personal data, credentials, or large training logs.
-    
-3.  If the folder is not already a Git repository, run `git init`. Then publish:
-    
-    ```bash
-    git add .
-    git diff --cached --stat  # Verify what will be committed
-    git commit -m "release: PIVOT-Reflex Stage 1 PPO baseline"
-    git branch -M main
-    # Add the remote only if you do not already have one:
-    if ! git remote get-url origin >/dev/null 2>&1; then
-      git remote add origin https://github.com/Muhd-Mahmud/PIVOT-Reflex.git
-    fi
-    git remote -v  # Verify that origin points to Muhd-Mahmud/PIVOT-Reflex
-    git push -u origin main
-    git tag v0.1.0
-    git push origin v0.1.0
-    ```
-    
-4.  Open [GitHub Releases](https://github.com/Muhd-Mahmud/PIVOT-Reflex/releases/new) and publish **v0.1.0 — Stage 1: PPO Autonomous Balancing**. If you want others to reproduce the exact evaluation, attach a copy of the corresponding trained Stage 1 checkpoint to the release, rather than committing repeated checkpoint files.
-    
-5.  The README already includes the current CAD rendering and MuJoCo screenshot. When a physical prototype is eventually built, add real hardware photos and measured results in a later commit; clearly label them as hardware results.
-    
-
-> **Before publishing:** If you already have a Git remote called `origin`, check `git remote -v`; use the existing remote if it points to the correct repository. Do not blindly run `git remote add origin` again. The initial GitHub repository must exist before `git push`.
 
 ## License and author
 
 **MIT licensed.** See [LICENSE](LICENSE) for the full text. Original PIVOT-Reflex code is released under the MIT License; independently licensed dependencies and any third-party assets remain governed by their own terms.
 
-**Maintained by [Muhd-Mahmud](https://github.com/Muhd-Mahmud).** Feedback and bug reports can be shared via [GitHub Issues](https://github.com/Muhd-Mahmud/PIVOT-Reflex/issues) after the repository is published.
+**Maintained by [Muhd-Mahmud](https://github.com/Muhd-Mahmud).** Feedback and bug reports can be shared via [GitHub Issues](https://github.com/Muhd-Mahmud/RL-Balancing-for-2-wheeled-Robot/issues) after the repository is published.
 
 ## References
 
